@@ -31,6 +31,7 @@
       background: #f4f9ff;
       color: #1a1a2e;
       overflow-x: hidden;
+      padding-top: 86px;
     }
 
     /* ─── SCROLLBAR ─── */
@@ -39,17 +40,40 @@
     ::-webkit-scrollbar-thumb { background: var(--blue-mid); border-radius: 10px; }
 
     /* ─── NAVBAR ─── */
-    #navbar {
+    #navbar, .navbar {
       position: fixed; top: 0; width: 100%; z-index: 1000;
       transition: all 0.4s ease;
       padding: 14px 0;
-      background: transparent;
+      background-color: transparent !important;
+      background-image: none !important;
+      border: none !important;
     }
     #navbar.scrolled {
-      background: rgba(13,43,110,0.97);
+      background-color: rgba(13,43,110,0.97) !important;
+      background-image: none !important;
       backdrop-filter: blur(12px);
       padding: 8px 0;
       box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+    }
+    #navbar .navbar-collapse,
+    #navbar .navbar-nav,
+    #navMenu,
+    #navMenu.collapse {
+      background-color: transparent !important;
+      background-image: none !important;
+    }
+    #navMenu.show {
+      background-color: rgba(13,43,110,0.95) !important;
+    }
+    #navbar .nav-link,
+    #navbar .navbar-brand span,
+    #navbar .navbar-toggler-icon {
+      color: #fff !important;
+      filter: invert(1) !important;
+    }
+    #navbar.scrolled .nav-link,
+    #navbar.scrolled .navbar-brand span {
+      color: #fff !important;
     }
     .navbar-brand img { height: 52px; transition: height 0.3s; }
     #navbar.scrolled .navbar-brand img { height: 42px; }
@@ -82,7 +106,7 @@
 
     /* ─── HERO ─── */
     #hero {
-      min-height: 100vh;
+      min-height: calc(100vh - 86px);
       background: var(--gradient-hero);
       position: relative; overflow: hidden;
       display: flex; align-items: center;
@@ -107,7 +131,8 @@
       color: #fff; border-radius: 30px;
       padding: 6px 18px; font-size: 0.8rem;
       font-weight: 600; letter-spacing: 1px;
-      text-transform: uppercase; margin-bottom: 20px;
+      text-transform: uppercase; margin: 0 auto 20px;
+      justify-content: center;
     }
     .hero-title {
       font-family: 'Montserrat', sans-serif;
@@ -121,30 +146,55 @@
       max-width: 520px; margin-bottom: 30px; line-height: 1.7;
     }
     .hero-stats {
-      display: flex; gap: 30px; flex-wrap: wrap;
+      display: flex; gap: 22px; flex-wrap: nowrap;
+      justify-content: center;
+      align-items: center;
       margin-bottom: 36px;
+      overflow-x: auto;
+      padding-bottom: 10px;
     }
-    .hero-stat { text-align: center; }
+    .hero-stats::-webkit-scrollbar { height: 6px; }
+    .hero-stats::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.4); border-radius: 999px; }
+    .hero-stat {
+      text-align: center;
+      flex: 0 0 auto;
+      min-width: 150px;
+      padding: 10px 6px;
+      white-space: nowrap;
+    }
     .hero-stat .num {
       font-family: 'Montserrat', sans-serif;
       font-size: 2rem; font-weight: 900; color: #fff;
     }
-    .hero-stat .lbl { font-size: 0.72rem; color: rgba(255,255,255,0.7); text-transform: uppercase; letter-spacing: 1px; }
+    .hero-stat .lbl { font-size: 0.78rem; color: rgba(255,255,255,0.78); text-transform: uppercase; letter-spacing: 1px; margin-top: 8px; }
+    .hero-action-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      justify-content: flex-start;
+      align-items: center;
+      margin-top: 14px;
+    }
+    .hero-action-group .btn-primary-kts,
+    .hero-action-group .btn-outline-kts {
+      min-width: 0;
+      width: auto;
+    }
     .btn-primary-kts {
       background: #fff; color: var(--blue-mid);
-      font-weight: 700; padding: 14px 32px; border-radius: 50px;
+      font-weight: 700; padding: 12px 24px; border-radius: 50px;
       border: none; font-size: 0.95rem; letter-spacing: 0.5px;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-      transition: all 0.3s; display: inline-flex; align-items: center; gap: 8px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.18);
+      transition: all 0.3s; display: inline-flex; align-items: center; gap: 10px;
     }
-    .btn-primary-kts:hover { transform: translateY(-3px); box-shadow: 0 14px 35px rgba(0,0,0,0.3); color: var(--blue-deep); }
+    .btn-primary-kts:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(0,0,0,0.2); color: var(--blue-deep); }
     .btn-outline-kts {
       background: transparent; color: #fff;
-      font-weight: 600; padding: 14px 28px; border-radius: 50px;
-      border: 2px solid rgba(255,255,255,0.5); font-size: 0.95rem;
-      transition: all 0.3s; display: inline-flex; align-items: center; gap: 8px;
+      font-weight: 600; padding: 12px 22px; border-radius: 50px;
+      border: 2px solid rgba(255,255,255,0.55); font-size: 0.95rem;
+      transition: all 0.3s; display: inline-flex; align-items: center; gap: 10px;
     }
-    .btn-outline-kts:hover { background: rgba(255,255,255,0.15); border-color: #fff; transform: translateY(-3px); color: #fff; }
+    .btn-outline-kts:hover { background: rgba(255,255,255,0.18); border-color: #fff; transform: translateY(-2px); color: #fff; }
 
     .hero-card {
       background: rgba(255,255,255,0.1);
@@ -152,6 +202,18 @@
       border: 1px solid rgba(255,255,255,0.2);
       border-radius: 24px; padding: 28px;
       color: #fff;
+    }
+    .hero-card-image {
+      padding: 0;
+      background: transparent;
+      border: none;
+      box-shadow: none;
+    }
+    .hero-card-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 24px;
     }
     .hero-card .fifa-badge {
       background: linear-gradient(135deg,#FFD700,#FFA500);
@@ -204,6 +266,7 @@
       box-shadow: 0 20px 60px rgba(21,101,192,0.25);
     }
     .about-img-wrap img { width: 100%; display: block; }
+    .about-logo { max-width: 100%; height: auto; border-radius: 24px; }
     .about-overlay {
       position: absolute; bottom: 0; left: 0; right: 0;
       background: var(--gradient-hero);
@@ -212,15 +275,62 @@
     .about-overlay p { color: #fff; font-weight: 600; margin: 0; font-size: 0.9rem; }
     .about-overlay small { color: rgba(255,255,255,0.75); font-size: 0.78rem; }
     .info-card {
-      border: none; border-radius: 18px;
-      padding: 24px; margin-bottom: 16px;
-      background: var(--blue-pale);
-      transition: all 0.3s;
-      border-left: 4px solid var(--blue-bright);
+      background: #ffffff;
+      border: 1px solid rgba(30,144,255,0.14);
+      border-radius: 24px;
+      padding: 26px 24px;
+      min-height: 220px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 14px;
+      transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+      box-shadow: 0 18px 40px rgba(16,52,102,0.06);
+      height: 100%;
     }
-    .info-card:hover { transform: translateX(6px); background: linear-gradient(135deg,#e8f4ff,#d1eaff); box-shadow: 0 8px 25px rgba(21,101,192,0.12); }
-    .info-card h5 { font-family: 'Montserrat', sans-serif; font-weight: 700; color: var(--blue-deep); font-size: 0.95rem; }
-    .info-card p { color: var(--gray); font-size: 0.85rem; margin: 0; }
+    .info-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 28px 55px rgba(16,52,102,0.12);
+      border-color: rgba(30,144,255,0.24);
+    }
+    .info-card h5 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      color: var(--blue-deep);
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0;
+    }
+    .info-card h5 i {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      min-width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: rgba(30,144,255,0.12);
+      color: var(--blue-bright);
+      font-size: 1rem;
+    }
+    .info-card p {
+      color: var(--gray);
+      font-size: 0.9rem;
+      line-height: 1.75;
+      margin: 0;
+    }
+    .about-content p {
+      color: #555;
+      text-align: justify;
+      line-height: 1.9;
+      max-width: 100%;
+      margin-bottom: 1.4rem;
+    }
+    .about-content p:last-child {
+      margin-bottom: 0;
+    }
     .about-highlight {
       background: var(--gradient-hero);
       border-radius: 20px; padding: 28px;
@@ -232,44 +342,74 @@
     /* ─── SERVICES ─── */
     #services { padding: 90px 0; background: linear-gradient(180deg,#f4f9ff 0%,#e8f4ff 100%); }
     .service-card {
-      background: #fff; border-radius: 22px;
-      padding: 32px 26px;
-      transition: all 0.35s;
+      background: rgba(255,255,255,0.98);
+      border-radius: 26px;
+      padding: 26px 22px;
+      transition: transform 0.35s, box-shadow 0.35s, border-color 0.35s, background 0.35s;
       border: 1px solid rgba(30,144,255,0.1);
       height: 100%;
-      position: relative; overflow: hidden;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 16px 32px rgba(16,52,102,0.06);
+      text-align: center;
     }
     .service-card::before {
       content: '';
-      position: absolute; top: 0; left: 0; right: 0;
+      position: absolute; top: 0; left: 50%; width: 0;
       height: 4px;
       background: var(--gradient-card);
-      transform: scaleX(0); transform-origin: left;
-      transition: transform 0.35s;
+      transform: translateX(-50%);
+      transition: width 0.35s ease;
     }
-    .service-card:hover::before { transform: scaleX(1); }
+    .service-card:hover::before { width: 72px; }
     .service-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 25px 60px rgba(21,101,192,0.18);
-      border-color: rgba(30,144,255,0.3);
+      transform: translateY(-8px);
+      box-shadow: 0 22px 48px rgba(16,52,102,0.12);
+      border-color: rgba(30,144,255,0.18);
+      background: #ffffff;
     }
     .service-icon {
-      width: 64px; height: 64px; border-radius: 18px;
-      background: var(--blue-pale);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.7rem; margin-bottom: 18px;
+      width: 60px; height: 60px; border-radius: 50%;
+      background: rgba(30,144,255,0.12);
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 1.25rem; margin: 0 auto 18px;
       transition: all 0.35s;
+      color: var(--blue-deep);
+      border: 1px solid rgba(30,144,255,0.15);
     }
     .service-card:hover .service-icon {
-      background: var(--gradient-card); color: #fff;
-      transform: scale(1.1) rotate(-5deg);
+      background: var(--gradient-card);
+      color: #fff;
+      transform: scale(1.08);
+      border-color: transparent;
     }
     .service-card h4 {
       font-family: 'Montserrat', sans-serif;
-      font-weight: 700; font-size: 1.05rem;
+      font-weight: 800; font-size: 1.15rem;
       color: var(--blue-deep); margin-bottom: 10px;
+      line-height: 1.2;
     }
-    .service-card p { font-size: 0.85rem; color: var(--gray); line-height: 1.7; }
+    .service-card p {
+      font-size: 0.92rem;
+      color: var(--gray);
+      line-height: 1.8;
+      margin: 0;
+    }
+    .service-card .service-text {
+      min-height: 88px;
+    }
+    .service-card .service-tag {
+      display: inline-flex;
+      margin: 20px auto 0;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(30,144,255,0.1);
+      color: var(--blue-deep);
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+    #services .section-title { margin-bottom: 0.5rem; }
+    #services .section-sub { max-width: 620px; margin: 0 auto; }
 
     /* ─── WHY US ─── */
     #why { padding: 90px 0; background: #fff; }
@@ -375,25 +515,152 @@
 
     /* ─── TESTIMONIALS ─── */
     #testimonials { padding: 90px 0; background: var(--blue-pale); }
-    .testi-card {
-      background: #fff; border-radius: 22px;
-      padding: 30px 28px;
-      box-shadow: 0 10px 30px rgba(21,101,192,0.08);
-      transition: all 0.35s; height: 100%;
-      border: 1px solid rgba(30,144,255,0.1);
+    .testimonial-slider {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      margin: 0 auto;
+      padding: 26px 0 16px;
     }
-    .testi-card:hover { transform: translateY(-8px); box-shadow: 0 25px 55px rgba(21,101,192,0.18); }
-    .stars { color: #FFD700; margin-bottom: 14px; font-size: 1rem; }
-    .testi-card p { font-size: 0.88rem; color: #444; line-height: 1.75; font-style: italic; margin-bottom: 20px; }
-    .testi-author { display: flex; align-items: center; gap: 12px; }
+    .testimonial-slider::before,
+    .testimonial-slider::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 72px;
+      pointer-events: none;
+      z-index: 2;
+      background: linear-gradient(90deg, rgba(244,249,255,1), rgba(244,249,255,0));
+    }
+    .testimonial-slider::after {
+      right: 0;
+      left: auto;
+      background: linear-gradient(270deg, rgba(244,249,255,1), rgba(244,249,255,0));
+    }
+    .testi-track {
+      display: flex;
+      align-items: stretch;
+      gap: 24px;
+      will-change: transform;
+      padding: 0 30px 20px;
+      min-height: 100%;
+    }
+    .testi-card {
+      background: #fff;
+      border-radius: 22px;
+      padding: 28px 24px;
+      box-shadow: 0 18px 40px rgba(17,82,153,0.08);
+      border: 1px solid rgba(30,144,255,0.12);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      min-height: 420px;
+      width: 320px;
+      flex: 0 0 320px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      text-align: left;
+    }
+    .testi-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 26px 55px rgba(17,82,153,0.15);
+    }
+    .testi-card-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+    .testi-card-head-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+    }
     .testi-avatar {
-      width: 46px; height: 46px; border-radius: 50%;
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
       background: var(--gradient-card);
-      display: flex; align-items: center; justify-content: center;
-      color: #fff; font-weight: 700; font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 700;
+      font-size: 1.1rem;
       flex-shrink: 0;
     }
-    .testi-author h6 { font-weight: 700; font-size: 0.88rem; color: var(--blue-deep); margin: 0; }
+    .testi-meta {
+      min-width: 0;
+    }
+    .testi-meta h6 { font-weight: 700; font-size: 0.95rem; color: var(--blue-deep); margin: 0; }
+    .testi-meta small { color: var(--gray); display: block; margin-top: 4px; font-size: 0.82rem; line-height: 1.4; }
+    .google-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(66,133,244,0.12);
+      color: #1a73e8;
+      font-size: 0.82rem;
+      font-weight: 700;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .google-badge i { font-size: 0.95rem; }
+    .testi-body {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 18px;
+      flex: 1;
+    }
+    .stars {
+      color: #FFD700;
+      margin: 0;
+      font-size: 1.05rem;
+      line-height: 1.2;
+      flex-shrink: 0;
+    }
+    .testi-card p {
+      font-size: 0.9rem;
+      color: #444;
+      line-height: 1.8;
+      font-style: italic;
+      margin: 0;
+      flex: 1;
+      min-height: 110px;
+    }
+    .testi-author { display: flex; align-items: center; gap: 12px; margin-top: 16px; }
+    .testi-author h6 { font-weight: 700; font-size: 0.9rem; color: var(--blue-deep); margin: 0; }
+    .testi-author small { color: var(--gray); font-size: 0.8rem; }
+    @media (max-width: 1200px) {
+      .testimonial-slider::before,
+      .testimonial-slider::after { width: 56px; }
+      .testi-track { padding: 0 24px 18px; gap: 20px; }
+      .testi-card { min-height: 400px; width: 300px; flex: 0 0 300px; max-width: 300px; }
+    }
+    @media (max-width: 992px) {
+      .testimonial-slider::before,
+      .testimonial-slider::after { width: 48px; }
+      .testi-track { padding: 0 22px 18px; gap: 18px; }
+      .testi-card { min-height: 390px; width: 280px; flex: 0 0 280px; max-width: 280px; }
+    }
+    @media (max-width: 768px) {
+      .testimonial-slider::before,
+      .testimonial-slider::after { width: 32px; }
+      .testi-track { padding: 0 18px 18px; gap: 16px; justify-content: center; }
+      .testi-card { width: 92%; min-width: 280px; max-width: 520px; flex: 0 0 92%; }
+    }
+    @media (max-width: 576px) {
+      .testimonial-slider::before,
+      .testimonial-slider::after { width: 0; }
+      .testi-track { padding: 0 14px 18px; gap: 14px; }
+      .testi-card { width: 100%; min-width: auto; flex: 0 0 100%; }
+    }
     .testi-author small { color: var(--gray); font-size: 0.77rem; }
 
     /* ─── FOOTER ─── */
@@ -471,11 +738,103 @@
     .counter-item p { color: rgba(255,255,255,0.75); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin: 0; }
 
     /* RESPONSIVE */
+    @media (max-width:992px) {
+      .hero-card, .about-img-wrap, .booking-form-wrap, .info-panel, .service-card, .why-card, .testi-card {
+        border-radius: 20px;
+      }
+      .hero-stats { gap: 16px; justify-content: center; }
+      .hero-stat { flex: 1 1 45%; }
+      .hero-title { font-size: clamp(2.1rem, 4.2vw, 3rem); }
+      .hero-subtitle { max-width: 100%; }
+      #navbar .navbar-collapse { background: rgba(13,43,110,0.95); padding: 16px; border-radius: 18px; }
+      .navbar-nav { gap: 0.5rem; }
+      .navbar-nav .nav-link { padding: 12px 16px !important; }
+      .section-sub { max-width: 100%; margin: 0 auto; }
+    }
     @media (max-width:768px) {
+      .hero { min-height: auto; padding: 110px 0 50px; }
+      .hero .container { padding-left: 18px; padding-right: 18px; }
+      .hero-title { font-size: 2.3rem; text-align: center; }
+      .hero-subtitle { font-size: 1rem; line-height: 1.8; text-align: center; margin: 0 auto; }
+      .hero-card { margin-top: 28px; }
+      .hero-badge { justify-content: center; margin: 0 auto 20px; }
+      .hero-stats { gap: 16px; flex-wrap: nowrap; overflow-x: auto; justify-content: center; padding-bottom: 10px; }
+      .hero-stat { flex: 0 0 auto; }
+      .hero-stat .num { font-size: 1.7rem; }
+      .hero-action-group { justify-content: center; }
+      .hero-action-group .btn-primary-kts,
+      .hero-action-group .btn-outline-kts { width: auto; }
       .booking-form-wrap { padding: 28px 20px; }
       .info-panel { margin-top: 28px; }
-      .hero-stats { gap: 18px; }
-      .hero-stat .num { font-size: 1.6rem; }
+      .service-card, .why-card, .testi-card { padding: 26px 20px; }
+      .service-card h4, .why-card h4, .testi-author h6 { font-size: 1rem; }
+      .section-title { text-align: center; }
+      .section-sub { text-align: center; }
+      .form-control, .form-select { font-size: 0.95rem; }
+      .social-row { justify-content: center; }
+      .footer-bottom { flex-direction: column; align-items: center; text-align: center; }
+      .footer-bottom span { width: 100%; }
+      .contact-item { gap: 12px; }
+    }
+    @media (max-width:576px) {
+      .navbar-brand span { font-size: 1rem; }
+      .navbar-nav .nav-link { font-size: 0.85rem; padding: 10px 12px !important; }
+      .hero { padding: 130px 0 45px; }
+      .hero .container { padding-left: 14px; padding-right: 14px; }
+      .hero-title { font-size: 1.9rem; }
+      .hero-subtitle { font-size: 0.95rem; max-width: 100%; }
+      .hero-stats { flex-wrap: nowrap; overflow-x: auto; justify-content: center; }
+      .hero-stat { flex: 0 0 auto; min-width: 130px; }
+      .hero-stat .num { font-size: 1.5rem; }
+      .hero-badge { justify-content: center; margin: 0 auto 20px; }
+      .hero-title, .hero-subtitle { text-align: center; }
+      .hero-action-group { justify-content: center; }
+      .hero-action-group .btn-primary-kts,
+      .hero-action-group .btn-outline-kts { width: auto; }
+      .cert-chips { justify-content: center; }
+      .hero-card, .about-img-wrap, .booking-form-wrap, .info-panel, .service-card, .why-card, .testi-card { margin: 0 auto; width: 100%; }
+      .service-card, .why-card, .testi-card { padding: 22px 18px; }
+      .about-img-wrap { padding: 36px 24px; }
+      .info-card { padding: 18px; }
+      .booking-form-wrap { padding: 24px 18px; }
+      .info-panel { padding: 28px 22px; }
+      .map-embed iframe { height: 260px; }
+      .section-title { font-size: 1.75rem; }
+      .section-sub { font-size: 0.95rem; }
+      .footer-logo { flex-direction: column; align-items: flex-start; }
+      .footer-bottom { padding-top: 18px; }
+      .footer-bottom span { width: 100%; }
+    }
+    @media (max-width:576px) {
+      .navbar-brand span { font-size: 1rem; }
+      .navbar-nav .nav-link { font-size: 0.85rem; padding: 10px 12px !important; }
+      .hero { padding: 130px 0 45px; }
+      .hero .container { padding-left: 14px; padding-right: 14px; }
+      .hero-title { font-size: 1.9rem; }
+      .hero-subtitle { font-size: 0.95rem; max-width: 100%; }
+      .hero-stats { flex-wrap: nowrap; overflow-x: auto; justify-content: center; padding-bottom: 8px; }
+      .hero-stats::-webkit-scrollbar { height: 5px; }
+      .hero-stats::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.4); border-radius: 999px; }
+      .hero-stat { flex: 0 0 auto; min-width: 130px; }
+      .hero-stat .num { font-size: 1.5rem; }
+      .hero-badge { justify-content: center; margin: 0 auto 20px; }
+      .hero-title, .hero-subtitle { text-align: center; }
+      .hero-action-group { justify-content: center; }
+      .hero-action-group .btn-primary-kts,
+      .hero-action-group .btn-outline-kts { width: auto; }
+      .cert-chips { justify-content: center; }
+      .hero-card, .about-img-wrap, .booking-form-wrap, .info-panel, .service-card, .why-card, .testi-card { margin: 0 auto; width: 100%; }
+      .service-card, .why-card, .testi-card { padding: 22px 18px; }
+      .about-img-wrap { padding: 36px 24px; }
+      .info-card { padding: 18px; }
+      .booking-form-wrap { padding: 24px 18px; }
+      .info-panel { padding: 28px 22px; }
+      .map-embed iframe { height: 260px; }
+      .section-title { font-size: 1.75rem; }
+      .section-sub { font-size: 0.95rem; }
+      .footer-logo { flex-direction: column; align-items: flex-start; }
+      .footer-bottom { padding-top: 18px; }
+      .footer-bottom span { width: 100%; }
     }
   </style>
 </head>
@@ -494,7 +853,7 @@
 <nav id="navbar" class="navbar navbar-expand-lg">
   <div class="container">
     <a class="navbar-brand d-flex align-items-center gap-2" href="#">
-      <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI0OCIgZmlsbD0iIzFlOTBmZiIvPjx0ZXh0IHg9IjUwJSIgeT0iNjAlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iTW9udHNlcnJhdCIgZm9udC13ZWlnaHQ9IjkwMCIgZm9udC1zaXplPSIzNiIgZmlsbD0iI2ZmZiI+a3RzPC90ZXh0Pjwvc3ZnPg==" alt="KTs Logo" id="navLogo"/>
+      <img src="logo.png" alt="KTs Logo" id="navLogo" style="height:52px; width:auto;" />
       <span>KT's Physical Therapy <small>INDIA · EST. 2018</small></span>
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
@@ -520,33 +879,21 @@
       <div class="col-lg-6" data-aos="fade-right" data-aos-duration="900">
         <div class="hero-badge"><i class="fas fa-star"></i> FIFA Certified Physiotherapist</div>
         <h1 class="hero-title">Heal Smarter,<br>Move <span class="accent">Better.</span></h1>
-        <p class="hero-subtitle">Expert physiotherapy, hydrotherapy & sports rehabilitation led by <strong>Dr. Kushal K. Tiwari</strong> — bringing world-class care to India since 2018.</p>
+        <p class="hero-subtitle">Expert physiotherapy, hydrotherapy & sports rehabilitation led by <strong>Dr. Kushal K. Tiwari</strong>, an Indian physiotherapist and athletic trainer working with top football clubs, AIFF, and Olympic sports teams.</p>
         <div class="hero-stats">
-          <div class="hero-stat"><div class="num" data-target="7">0</div><div class="lbl">Years Exp.</div></div>
-          <div class="hero-stat"><div class="num" data-target="2000">0</div><div class="lbl">Patients+</div></div>
-          <div class="hero-stat"><div class="num" data-target="15">0</div><div class="lbl">Specialities</div></div>
-          <div class="hero-stat"><div class="num" data-target="100">0</div><div class="lbl">% Dedicated</div></div>
+          <div class="hero-stat"><div class="num" data-target="10">10</div><div class="lbl">Years Exp.</div></div>
+          <div class="hero-stat"><div class="num" data-target="5000">5,000</div><div class="lbl">Patients</div></div>
+          <div class="hero-stat"><div class="num" data-target="15">15</div><div class="lbl">Specialties</div></div>
+          <div class="hero-stat"><div class="num" data-target="100">100</div><div class="lbl">Dedicated</div></div>
         </div>
-        <div class="d-flex flex-wrap gap-3">
+        <div class="hero-action-group">
           <a href="#booking" class="btn-primary-kts"><i class="fas fa-calendar-plus"></i> Book Appointment</a>
           <a href="https://wa.me/91XXXXXXXXXX" target="_blank" class="btn-outline-kts"><i class="fab fa-whatsapp"></i> WhatsApp</a>
         </div>
       </div>
       <div class="col-lg-6" data-aos="fade-left" data-aos-duration="900" data-aos-delay="200">
-        <div class="hero-card">
-          <div class="fifa-badge">⚽ FIFA PHYSIOTHERAPIST</div>
-          <h3>Dr. Kushal K. Tiwari</h3>
-          <p>BPT · MPT · FIFA Certified · Hydrotherapist · Wikipedia-Featured Expert</p>
-          <div class="cert-chips">
-            <span class="cert-chip">🏅 BPT Graduate</span>
-            <span class="cert-chip">🎓 MPT – Sports</span>
-            <span class="cert-chip">⚽ FIFA Diploma</span>
-            <span class="cert-chip">💧 Hydrotherapy</span>
-            <span class="cert-chip">🏆 Sports Rehab</span>
-            <span class="cert-chip">🦴 Orthopaedics</span>
-            <span class="cert-chip">🧠 Neuro Physio</span>
-            <span class="cert-chip">🌍 Wikipedia Featured</span>
-          </div>
+        <div class="hero-card hero-card-image">
+          <img src="banner.png" alt="KT's Physical Therapy Banner" />
         </div>
       </div>
     </div>
@@ -562,27 +909,16 @@
     <div class="row g-5 align-items-center">
       <div class="col-lg-5" data-aos="fade-right">
         <div class="about-img-wrap">
-          <!-- KTS Logo used as focal element -->
-          <div style="background:linear-gradient(135deg,#0d2b6e,#1e90ff);padding:60px 40px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:20px;">
-            <div style="width:160px;height:160px;border-radius:50%;background:rgba(255,255,255,0.15);border:4px solid rgba(255,255,255,0.3);display:flex;align-items:center;justify-content:center;font-family:Montserrat,sans-serif;font-weight:900;font-size:3rem;color:#fff;">kts</div>
-            <p style="color:#fff;font-family:Montserrat,sans-serif;font-weight:700;font-size:1.1rem;text-align:center;margin:0;">KT's Physical Therapy</p>
-            <p style="color:rgba(255,255,255,0.75);font-size:0.8rem;text-align:center;margin:0;letter-spacing:2px;text-transform:uppercase;">India · Estd. 2018</p>
-          </div>
-          <div class="about-overlay">
-            <p>Dr. Kushal K. Tiwari</p>
-            <small>FIFA Physiotherapist & Hydrotherapist · Wikipedia Featured</small>
-          </div>
+          <img src="kushal-tiwari.jpeg" alt="Dr. Kushal K. Tiwari" class="about-logo" />
         </div>
       </div>
       <div class="col-lg-7" data-aos="fade-left" data-aos-delay="150">
         <div class="title-line"></div>
         <h2 class="section-title mb-3">About Dr. Kushal K. Tiwari</h2>
-        <p class="mb-4" style="color:#555;line-height:1.8;font-size:0.95rem;">Dr. Kushal K. Tiwari is a <strong>FIFA-certified Physiotherapist</strong> and <strong>Hydrotherapist</strong> with expertise spanning sports rehabilitation, orthopaedics, neurology, and aquatic therapy. Since founding KT's Physical Therapy India in 2018, he has helped thousands of patients recover, perform, and thrive. His work has earned him recognition on <em>Wikipedia</em> and international sporting events.</p>
-        <div class="row g-3">
-          <div class="col-sm-6"><div class="info-card"><h5><i class="fas fa-graduation-cap me-2" style="color:var(--blue-bright)"></i>Education</h5><p>BPT · MPT (Sports & Exercise) · FIFA Diploma in Football Medicine</p></div></div>
-          <div class="col-sm-6"><div class="info-card"><h5><i class="fas fa-trophy me-2" style="color:var(--blue-bright)"></i>FIFA Certified</h5><p>Internationally recognized FIFA Physiotherapist for football medicine</p></div></div>
-          <div class="col-sm-6"><div class="info-card"><h5><i class="fas fa-tint me-2" style="color:var(--blue-bright)"></i>Hydrotherapy Expert</h5><p>Certified Hydrotherapist providing aquatic therapy & rehabilitation</p></div></div>
-          <div class="col-sm-6"><div class="info-card"><h5><i class="fas fa-globe me-2" style="color:var(--blue-bright)"></i>Wikipedia Featured</h5><p>Recognized internationally — documented on Wikipedia for contributions to physiotherapy</p></div></div>
+        <div class="about-content">
+          <p>Kushal Kumar Tiwari, also known as Physio KT, was born on 16 September 1987 in Khandwa, Madhya Pradesh. He completed his BPT at Himalayan University and his MPT in Sports Rehabilitation from IEC University, Himachal Pradesh. A former Indian Scouts volunteer with defence and rescue training, he is also a Black Belt Taekwondo athlete who won gold in the 2017 World Team Poomsae Championship in Bangkok.</p>
+          <p>Dr. Tiwari has served as a team physiotherapist for the All India Football Federation, Indian Olympic Association sports teams, Hockey Chandigarh, Minerva Academy FC, Delhi FC, and RoundGlass Sports. He is known for introducing professional sports-specific hydrotherapy rehabilitation in India and supporting national-level athletes through injury recovery and high performance training.</p>
+          <p>Stay connected with the clinic through the shared Google Maps location and follow <strong>@kts.physical.therapy.india</strong> on Instagram for clinic updates, patient success stories, and rehabilitation tips.</p>
         </div>
       </div>
     </div>
@@ -606,47 +942,53 @@
       <h2 class="section-title">Our Treatments & Services</h2>
       <p class="section-sub mx-auto mt-2">Comprehensive physiotherapy solutions tailored to your recovery and performance goals.</p>
     </div>
-    <div class="row g-4">
-      <div class="col-sm-6 col-lg-4" data-aos="fade-up" data-aos-delay="0">
-        <div class="service-card">
-          <div class="service-icon">⚽</div>
+    <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4">
+      <div class="col" data-aos="fade-up" data-aos-delay="0">
+        <div class="service-card h-100">
+          <div class="service-icon"><i class="fas fa-futbol"></i></div>
           <h4>Sports Physiotherapy</h4>
-          <p>Expert treatment for sports injuries, performance enhancement, and return-to-sport rehabilitation for athletes of all levels.</p>
+          <div class="service-text"><p>Expert treatment for sports injuries, performance enhancement, and return-to-sport rehabilitation for athletes at every level.</p></div>
+          <span class="service-tag">Athlete Recovery</span>
         </div>
       </div>
-      <div class="col-sm-6 col-lg-4" data-aos="fade-up" data-aos-delay="80">
-        <div class="service-card">
-          <div class="service-icon">💧</div>
+      <div class="col" data-aos="fade-up" data-aos-delay="80">
+        <div class="service-card h-100">
+          <div class="service-icon"><i class="fas fa-water"></i></div>
           <h4>Hydrotherapy</h4>
-          <p>Water-based therapeutic exercises designed to reduce pain, improve mobility and accelerate healing in a controlled aquatic environment.</p>
+          <div class="service-text"><p>Water-based therapeutic exercises to reduce pain, improve mobility, and accelerate healing in a controlled aquatic setting.</p></div>
+          <span class="service-tag">Aqua Rehab</span>
         </div>
       </div>
-      <div class="col-sm-6 col-lg-4" data-aos="fade-up" data-aos-delay="160">
-        <div class="service-card">
-          <div class="service-icon">🦴</div>
+      <div class="col" data-aos="fade-up" data-aos-delay="160">
+        <div class="service-card h-100">
+          <div class="service-icon"><i class="fas fa-bone"></i></div>
           <h4>Orthopaedic Rehab</h4>
-          <p>Focused rehabilitation for fractures, joint replacements, arthritis, and post-surgical recovery to restore full function.</p>
+          <div class="service-text"><p>Focused rehabilitation for fractures, joint replacements, arthritis, and post-surgical recovery to restore full strength.</p></div>
+          <span class="service-tag">Joint Care</span>
         </div>
       </div>
-      <div class="col-sm-6 col-lg-4" data-aos="fade-up" data-aos-delay="240">
-        <div class="service-card">
-          <div class="service-icon">🧠</div>
+      <div class="col" data-aos="fade-up" data-aos-delay="240">
+        <div class="service-card h-100">
+          <div class="service-icon"><i class="fas fa-brain"></i></div>
           <h4>Neuro Physiotherapy</h4>
-          <p>Specialised neurological rehabilitation for stroke, Parkinson's, multiple sclerosis, and spinal cord conditions.</p>
+          <div class="service-text"><p>Specialised neurological rehabilitation for stroke, Parkinson's, multiple sclerosis, and spinal cord conditions.</p></div>
+          <span class="service-tag">Neuro Recovery</span>
         </div>
       </div>
-      <div class="col-sm-6 col-lg-4" data-aos="fade-up" data-aos-delay="320">
-        <div class="service-card">
-          <div class="service-icon">🏃</div>
+      <div class="col" data-aos="fade-up" data-aos-delay="320">
+        <div class="service-card h-100">
+          <div class="service-icon"><i class="fas fa-stethoscope"></i></div>
           <h4>Dry Needling & IFT</h4>
-          <p>Advanced electrotherapy and dry needling techniques for pain relief, muscle relaxation, and tissue healing.</p>
+          <div class="service-text"><p>Advanced electrotherapy and dry needling techniques for pain relief, muscle relaxation, and targeted tissue healing.</p></div>
+          <span class="service-tag">Pain Management</span>
         </div>
       </div>
-      <div class="col-sm-6 col-lg-4" data-aos="fade-up" data-aos-delay="400">
-        <div class="service-card">
-          <div class="service-icon">🧘</div>
+      <div class="col" data-aos="fade-up" data-aos-delay="400">
+        <div class="service-card h-100">
+          <div class="service-icon"><i class="fas fa-user-md"></i></div>
           <h4>Postural & Spine Care</h4>
-          <p>Targeted therapy for back pain, scoliosis, cervical issues, and posture correction for desk workers and athletes.</p>
+          <div class="service-text"><p>Targeted therapy for back pain, scoliosis, cervical issues, and posture correction for office workers and athletes.</p></div>
+          <span class="service-tag">Spine Health</span>
         </div>
       </div>
     </div>
@@ -693,31 +1035,164 @@
 <!-- ═══════════════ TESTIMONIALS ═══════════════ -->
 <section id="testimonials">
   <div class="container">
-    <div class="text-center mb-5" data-aos="fade-up">
+    <div class="text-center mb-4" data-aos="fade-up">
       <div class="title-line mx-auto"></div>
       <h2 class="section-title">What Our Patients Say</h2>
-      <p class="section-sub mx-auto mt-2">Real stories of recovery, hope, and transformation.</p>
+      <p class="section-sub mx-auto mt-2">Real stories of recovery, hope, and transformation — easy to read and smoothly animated for every visitor.</p>
     </div>
-    <div class="row g-4">
-      <div class="col-md-4" data-aos="fade-up" data-aos-delay="0">
+  </div>
+  <div class="container-fluid px-0">
+    <div class="testimonial-slider" data-aos="fade-up" data-aos-delay="100">
+      <div class="testi-track">
         <div class="testi-card">
-          <div class="stars">★★★★★</div>
-          <p>"Dr. Kushal is incredible! After my ACL tear, I thought my football career was over. His sports rehab program got me back on the field in 4 months. Best physio in India!"</p>
-          <div class="testi-author"><div class="testi-avatar">R</div><div><h6>Rahul Sharma</h6><small>Football Player, Delhi</small></div></div>
+          <div class="testi-card-head">
+            <div class="testi-card-head-left">
+              <div class="testi-avatar">R</div>
+              <div class="testi-meta"><h6>Rajat Mehra</h6><small>Football Coach, Punjab</small></div>
+            </div>
+            <span class="google-badge"><i class="fab fa-google"></i>Google Review</span>
+          </div>
+          <div class="testi-body"><div class="stars">★★★★★</div><p>"Dr. Kushal helped me regain full mobility after my knee surgery. Every session felt personal and highly effective."</p></div>
         </div>
-      </div>
-      <div class="col-md-4" data-aos="fade-up" data-aos-delay="120">
         <div class="testi-card">
-          <div class="stars">★★★★★</div>
-          <p>"The hydrotherapy sessions were a game-changer for my knee replacement recovery. Dr. Tiwari's expertise and patience made the entire healing process so smooth and effective."</p>
-          <div class="testi-author"><div class="testi-avatar">P</div><div><h6>Priya Verma</h6><small>Homemaker, Himachal Pradesh</small></div></div>
+          <div class="testi-card-head">
+            <div class="testi-card-head-left">
+              <div class="testi-avatar">S</div>
+              <div class="testi-meta"><h6>Sneha Gupta</h6><small>Office Executive, Shimla</small></div>
+            </div>
+            <span class="google-badge"><i class="fab fa-google"></i>Google Review</span>
+          </div>
+          <div class="testi-body"><div class="stars">★★★★★</div><p>"Amazing hydrotherapy treatment. Pain reduced faster than expected and the team was unbelievably supportive."</p></div>
         </div>
-      </div>
-      <div class="col-md-4" data-aos="fade-up" data-aos-delay="240">
         <div class="testi-card">
-          <div class="stars">★★★★★</div>
-          <p>"I had severe back pain for 2 years. After just 3 weeks with Dr. Kushal, I'm completely pain-free. His diagnosis was spot-on and treatment absolutely world-class!"</p>
-          <div class="testi-author"><div class="testi-avatar">A</div><div><h6>Amit Thakur</h6><small>IT Professional, Chandigarh</small></div></div>
+          <div class="testi-card-head">
+            <div class="testi-card-head-left">
+              <div class="testi-avatar">M</div>
+              <div class="testi-meta"><h6>Manish Kapoor</h6><small>Engineer, Chandigarh</small></div>
+            </div>
+            <span class="google-badge"><i class="fab fa-google"></i>Google Review</span>
+          </div>
+          <div class="testi-body"><div class="stars">★★★★★</div><p>"Post-surgery rehab at KT's was exceptional. I felt safe and confident at every step."</p></div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-card-head">
+            <div class="testi-card-head-left">
+              <div class="testi-avatar">N</div>
+              <div class="testi-meta"><h6>Nisha Sharma</h6><small>Yoga Trainer, Delhi</small></div>
+            </div>
+            <span class="google-badge"><i class="fab fa-google"></i>Google Review</span>
+          </div>
+          <div class="testi-body"><div class="stars">★★★★★</div><p>"I recovered from chronic shoulder pain in just weeks. The treatment plan was smart and professional."</p></div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-card-head">
+            <div class="testi-card-head-left">
+              <div class="testi-avatar">K</div>
+              <div class="testi-meta"><h6>Kavita Singh</h6><small>Teacher, Himachal Pradesh</small></div>
+            </div>
+            <span class="google-badge"><i class="fab fa-google"></i>Google Review</span>
+          </div>
+          <div class="testi-body"><div class="stars">★★★★★</div><p>"A truly premium experience. Dr. Kushal's clinical knowledge and communication are outstanding."</p></div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-card-head">
+            <div class="testi-card-head-left">
+              <div class="testi-avatar">A</div>
+              <div class="testi-meta"><h6>Aryan Joshi</h6><small>Sports Student, Delhi</small></div>
+            </div>
+            <span class="google-badge"><i class="fab fa-google"></i>Google Review</span>
+          </div>
+          <div class="testi-body"><div class="stars">★★★★★</div><p>"My recovery after ACL repair was faster than expected. Highly recommend the sports rehabilitation program."</p></div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-card-head">
+            <div class="testi-card-head-left">
+              <div class="testi-avatar">P</div>
+              <div class="testi-meta"><h6>Priya Nanda</h6><small>Entrepreneur, Shimla</small></div>
+            </div>
+            <span class="google-badge"><i class="fab fa-google"></i>Google Review</span>
+          </div>
+          <div class="testi-body"><div class="stars">★★★★★</div><p>"The clinic atmosphere is comforting, and the rehabilitation process feels very safe and advanced."</p></div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-card-head">
+            <div class="testi-card-head-left">
+              <div class="testi-avatar">V</div>
+              <div class="testi-meta"><h6>Vikram Singh</h6><small>School Athlete, Punjab</small></div>
+            </div>
+            <span class="google-badge"><i class="fab fa-google"></i>Google Review</span>
+          </div>
+          <div class="testi-body"><div class="stars">★★★★★</div><p>"Every session is carefully monitored. I regained strength and mobility quickly with their support."</p></div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-card-head">
+            <div class="testi-card-head-left">
+              <div class="testi-avatar">A</div>
+              <div class="testi-meta"><h6>Anjali Reddy</h6><small>Marketing Lead, Delhi</small></div>
+            </div>
+            <span class="google-badge"><i class="fab fa-google"></i>Google Review</span>
+          </div>
+          <div class="testi-body"><div class="stars">★★★★★</div><p>"Fast response, excellent care and amazing results. This team truly understands sports injuries."</p></div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-card-head">
+            <div class="testi-card-head-left">
+              <div class="testi-avatar">R</div>
+              <div class="testi-meta"><h6>Rohit Kumar</h6><small>Student, Himachal Pradesh</small></div>
+            </div>
+            <span class="google-badge"><i class="fab fa-google"></i>Google Review</span>
+          </div>
+          <div class="testi-body"><div class="stars">★★★★★</div><p>"The dry needling and IFT sessions were very effective - I felt immediate relief and improvement."</p></div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-card-head">
+            <div class="testi-card-head-left">
+              <div class="testi-avatar">S</div>
+              <div class="testi-meta"><h6>Simran Kaur</h6><small>Consultant, Chandigarh</small></div>
+            </div>
+            <span class="google-badge"><i class="fab fa-google"></i>Google Review</span>
+          </div>
+          <div class="testi-body"><div class="stars">★★★★★</div><p>"I used to struggle with posture pain at my desk job. KT's therapy corrected my spine alignment beautifully."</p></div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-card-head">
+            <div class="testi-card-head-left">
+              <div class="testi-avatar">D</div>
+              <div class="testi-meta"><h6>Deepak Arora</h6><small>Business Owner, Delhi</small></div>
+            </div>
+            <span class="google-badge"><i class="fab fa-google"></i>Google Review</span>
+          </div>
+          <div class="testi-body"><div class="stars">★★★★★</div><p>"Highly professional service from consultation to follow-up. Every visit felt precise and reassuring."</p></div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-card-head">
+            <div class="testi-card-head-left">
+              <div class="testi-avatar">S</div>
+              <div class="testi-meta"><h6>Sonia Patel</h6><small>Physiotherapy Student, Himachal</small></div>
+            </div>
+            <span class="google-badge"><i class="fab fa-google"></i>Google Review</span>
+          </div>
+          <div class="testi-body"><div class="stars">★★★★★</div><p>"I regained confidence after a sports injury. The therapy program is tailored, comfortable, and highly effective."</p></div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-card-head">
+            <div class="testi-card-head-left">
+              <div class="testi-avatar">M</div>
+              <div class="testi-meta"><h6>Mahesh Gupta</h6><small>Teacher, Haryana</small></div>
+            </div>
+            <span class="google-badge"><i class="fab fa-google"></i>Google Review</span>
+          </div>
+          <div class="testi-body"><div class="stars">★★★★★</div><p>"The clinic's approach to rehabilitation is advanced and truly patient-oriented. I felt listened to every step."</p></div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-card-head">
+            <div class="testi-card-head-left">
+              <div class="testi-avatar">S</div>
+              <div class="testi-meta"><h6>Suresh Rana</h6><small>Cricket Coach, Shimla</small></div>
+            </div>
+            <span class="google-badge"><i class="fab fa-google"></i>Google Review</span>
+          </div>
+          <div class="testi-body"><div class="stars">★★★★★</div><p>"KT's Physical Therapy delivers consistent, trustworthy results. My sports performance improved dramatically."</p></div>
         </div>
       </div>
     </div>
@@ -812,6 +1287,14 @@
             <div class="ci-text"><strong>Clinic Hours</strong>Mon–Sat: 9:00 AM – 7:00 PM<br>Sunday: By Appointment Only</div>
           </div>
           <div class="contact-item">
+            <div class="ci-icon"><i class="fas fa-map-marked-alt"></i></div>
+            <div class="ci-text"><strong>Live Location</strong><a href="https://www.google.com/maps?kgmid=/g/11vx7c6f3q" target="_blank" style="color:#fff;text-decoration:underline;display:block;margin-top:4px;">View shared Google Maps location</a></div>
+          </div>
+          <div class="contact-item">
+            <div class="ci-icon"><i class="fab fa-instagram"></i></div>
+            <div class="ci-text"><strong>Instagram</strong>Follow <a href="https://www.instagram.com/kts.physical.therapy.india" target="_blank" style="color:#fff;text-decoration:underline;display:block;margin-top:4px;">@kts.physical.therapy.india</a> for updates, patient stories, and therapy tips.</div>
+          </div>
+          <div class="contact-item">
             <div class="ci-icon"><i class="fas fa-star"></i></div>
             <div class="ci-text"><strong>Google Rating</strong>⭐⭐⭐⭐⭐ Highly Rated on Google Maps</div>
           </div>
@@ -839,7 +1322,7 @@
     <div class="row g-5">
       <div class="col-lg-4">
         <div class="footer-logo d-flex align-items-center gap-3 mb-20">
-          <div style="width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#1565c0,#1e90ff);display:flex;align-items:center;justify-content:center;font-family:Montserrat,sans-serif;font-weight:900;color:#fff;font-size:1.1rem;">kts</div>
+          <img src="logo.png" alt="KTs Logo" style="height:56px; width:auto;" />
           <span>KT's Physical Therapy<small>INDIA · EST. 2018</small></span>
         </div>
         <p style="font-size:0.85rem;line-height:1.8;margin-top:16px;">Led by <strong style="color:#fff">Dr. Kushal K. Tiwari</strong>, FIFA Physiotherapist & Hydrotherapist. Delivering world-class physical therapy and sports rehabilitation across India.</p>
@@ -942,6 +1425,34 @@
   // Set minimum booking date to today
   const dateInput = document.getElementById('bDate');
   if (dateInput) dateInput.min = new Date().toISOString().split('T')[0];
+
+  // Testimonial slider auto-scroll
+  const testimonialSlider = document.querySelector('.testimonial-slider');
+  const testiTrack = document.querySelector('.testi-track');
+  const isAutoScrollEnabled = () => window.innerWidth >= 768;
+  if (testimonialSlider && testiTrack) {
+    if (isAutoScrollEnabled()) testiTrack.innerHTML += testiTrack.innerHTML;
+    let lastTimestamp = null;
+    let offset = 0;
+    const speed = 0.14; // px per millisecond
+    let paused = false;
+
+    const animateSlider = (timestamp) => {
+      if (lastTimestamp !== null && !paused && isAutoScrollEnabled()) {
+        const delta = timestamp - lastTimestamp;
+        offset += speed * delta;
+        const resetWidth = testiTrack.scrollWidth / 2;
+        if (offset >= resetWidth) offset -= resetWidth;
+        testiTrack.style.transform = `translateX(${-offset}px)`;
+      }
+      lastTimestamp = timestamp;
+      window.requestAnimationFrame(animateSlider);
+    };
+
+    testimonialSlider.addEventListener('mouseenter', () => { if (isAutoScrollEnabled()) paused = true; });
+    testimonialSlider.addEventListener('mouseleave', () => { if (isAutoScrollEnabled()) paused = false; });
+    window.requestAnimationFrame(animateSlider);
+  }
 </script>
 </body>
 </html>
