@@ -2631,23 +2631,44 @@
       function submitBooking() {
         const name = document.getElementById("bName").value.trim();
         const phone = document.getElementById("bPhone").value.trim();
+        const email = document.getElementById("bEmail").value.trim();
+        const age = document.getElementById("bAge").value.trim();
         const date = document.getElementById("bDate").value;
         const time = document.getElementById("bTime").value;
         const service = document.getElementById("bService").value;
+        const msg = document.getElementById("bMsg").value.trim();
 
         if (!name || !phone || !date || !time || !service) {
           showToast("⚠️ Please fill all required fields!", "#e53e3e");
           return;
         }
-        showToast(
-          "✅ Booking request sent! We'll call you shortly.",
-          "#1565c0",
-        );
-        document
-          .querySelectorAll(
-            "#booking input, #booking select, #booking textarea",
-          )
-          .forEach((el) => (el.value = ""));
+
+        // Validate phone number (basic validation)
+        if (!/^\d{10}$/.test(phone.replace(/\D/g, ""))) {
+          showToast("⚠️ Please enter a valid 10-digit phone number!", "#e53e3e");
+          return;
+        }
+
+        // Store booking data in sessionStorage
+        const bookingData = {
+          name: name,
+          phone: phone,
+          email: email,
+          age: age,
+          date: date,
+          time: time,
+          service: service,
+          message: msg,
+          bookingTime: new Date().toISOString(),
+        };
+
+        sessionStorage.setItem("bookingData", JSON.stringify(bookingData));
+
+        // Show processing message and redirect to payment
+        showToast("✅ Redirecting to payment...", "#1565c0");
+        setTimeout(() => {
+          window.location.href = "payment.html";
+        }, 1500);
       }
 
       function showToast(msg, color) {
