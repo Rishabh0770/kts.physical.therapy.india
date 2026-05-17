@@ -742,6 +742,59 @@
         transform: translateY(-3px);
         box-shadow: 0 14px 35px rgba(21, 101, 192, 0.5);
       }
+      
+      /* ─── SLOT GRID ─── */
+      .slot-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 12px;
+        margin-bottom: 8px;
+      }
+      .time-slot {
+        padding: 14px;
+        border: 2px solid #e0eefe;
+        border-radius: 12px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        background: #f9fcff;
+        font-weight: 600;
+        font-size: 0.85rem;
+        color: var(--blue-deep);
+      }
+      .time-slot:hover:not(.booked):not(.past) {
+        border-color: var(--blue-bright);
+        background: #e8f4ff;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(30, 144, 255, 0.2);
+      }
+      .time-slot.selected {
+        background: var(--gradient-hero);
+        color: #fff;
+        border-color: var(--blue-bright);
+        box-shadow: 0 6px 20px rgba(21, 101, 192, 0.3);
+      }
+      .time-slot.booked {
+        background: #f5f5f5;
+        color: #999;
+        border-color: #ddd;
+        cursor: not-allowed;
+        opacity: 0.6;
+      }
+      .time-slot.booked::after {
+        content: " ✕ BOOKED";
+        font-size: 0.7rem;
+        display: block;
+        margin-top: 4px;
+      }
+      .time-slot.past {
+        background: #f5f5f5;
+        color: #999;
+        border-color: #ddd;
+        cursor: not-allowed;
+        opacity: 0.5;
+      }
+      
       .info-panel {
         background: var(--gradient-hero);
         border-radius: 28px;
@@ -2295,75 +2348,63 @@
         <div class="row g-4 align-items-stretch">
           <div class="col-lg-7" data-aos="fade-right">
             <div class="booking-form-wrap">
-              <h4
-                style="
-                  font-family: Montserrat, sans-serif;
-                  font-weight: 800;
-                  color: var(--blue-deep);
-                  margin-bottom: 24px;
-                "
-              >
-                <i
-                  class="fas fa-calendar-check me-2"
-                  style="color: var(--blue-bright)"
-                ></i
-                >Schedule a Session
+              <h4 style="font-family: Montserrat, sans-serif; font-weight: 800; color: var(--blue-deep); margin-bottom: 24px;">
+                <i class="fas fa-calendar-check me-2" style="color: var(--blue-bright)"></i>Schedule a Session
               </h4>
               <div class="row g-3">
+                <!-- Personal Info Section -->
+                <div class="col-12">
+                  <div style="background: #f0f8ff; padding: 14px; border-radius: 10px; border-left: 4px solid var(--blue-bright); margin-bottom: 12px;">
+                    <p style="margin: 0; font-size: 0.85rem; color: var(--blue-deep); font-weight: 600;">
+                      <i class="fas fa-info-circle me-2"></i> Step 1: Your Information
+                    </p>
+                  </div>
+                </div>
                 <div class="col-sm-6">
                   <label class="form-label">Full Name *</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="bName"
-                    placeholder="Your full name"
-                  />
+                  <input type="text" class="form-control" id="bName" placeholder="Your full name" />
                 </div>
                 <div class="col-sm-6">
                   <label class="form-label">Phone Number *</label>
-                  <input
-                    type="tel"
-                    class="form-control"
-                    id="bPhone"
-                    placeholder="+91 XXXXX XXXXX"
-                  />
+                  <input type="tel" class="form-control" id="bPhone" placeholder="+91 XXXXX XXXXX" />
                 </div>
                 <div class="col-sm-6">
                   <label class="form-label">Email Address</label>
-                  <input
-                    type="email"
-                    class="form-control"
-                    id="bEmail"
-                    placeholder="you@email.com"
-                  />
+                  <input type="email" class="form-control" id="bEmail" placeholder="you@email.com" />
                 </div>
                 <div class="col-sm-6">
                   <label class="form-label">Age</label>
-                  <input
-                    type="number"
-                    class="form-control"
-                    id="bAge"
-                    placeholder="e.g. 30"
-                    min="1"
-                    max="100"
-                  />
+                  <input type="number" class="form-control" id="bAge" placeholder="e.g. 30" min="1" max="100" />
                 </div>
-                <div class="col-sm-6">
-                  <label class="form-label">Preferred Date *</label>
+
+                <!-- Date & Time Selection Section -->
+                <div class="col-12">
+                  <div style="background: #f0f8ff; padding: 14px; border-radius: 10px; border-left: 4px solid var(--blue-bright); margin: 12px 0;">
+                    <p style="margin: 0; font-size: 0.85rem; color: var(--blue-deep); font-weight: 600;">
+                      <i class="fas fa-clock me-2"></i> Step 2: Select Date & Time Slot
+                    </p>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <label class="form-label">Choose Date *</label>
                   <input type="date" class="form-control" id="bDate" />
+                  <small style="color: #999; margin-top: 4px; display: block;">Available: Daily (10 AM - 6 PM)</small>
                 </div>
-                <div class="col-sm-6">
-                  <label class="form-label">Preferred Time *</label>
-                  <select class="form-select" id="bTime">
-                    <option value="">Select time slot</option>
-                    <option>09:00 AM – 10:00 AM</option>
-                    <option>10:00 AM – 11:00 AM</option>
-                    <option>11:00 AM – 12:00 PM</option>
-                    <option>02:00 PM – 03:00 PM</option>
-                    <option>03:00 PM – 04:00 PM</option>
-                    <option>05:00 PM – 06:00 PM</option>
-                    <option>06:00 PM – 07:00 PM</option>
-                  </select>
+                <div class="col-12">
+                  <label class="form-label">Available Time Slots *</label>
+                  <div id="slotContainer" class="slot-grid">
+                    <p style="color: #999; text-align: center; padding: 20px; grid-column: 1/-1;">Select a date to view available slots</p>
+                  </div>
+                </div>
+                <input type="hidden" id="bTime" />
+
+                <!-- Service Selection Section -->
+                <div class="col-12">
+                  <div style="background: #f0f8ff; padding: 14px; border-radius: 10px; border-left: 4px solid var(--blue-bright); margin: 12px 0;">
+                    <p style="margin: 0; font-size: 0.85rem; color: var(--blue-deep); font-weight: 600;">
+                      <i class="fas fa-stethoscope me-2"></i> Step 3: Select Service & Details
+                    </p>
+                  </div>
                 </div>
                 <div class="col-12">
                   <label class="form-label">Treatment Required *</label>
@@ -2381,17 +2422,11 @@
                 </div>
                 <div class="col-12">
                   <label class="form-label">Describe Your Condition</label>
-                  <textarea
-                    class="form-control"
-                    id="bMsg"
-                    rows="3"
-                    placeholder="Tell us about your pain, injury, or condition..."
-                  ></textarea>
+                  <textarea class="form-control" id="bMsg" rows="3" placeholder="Tell us about your pain, injury, or condition..."></textarea>
                 </div>
-                <div class="col-12 mt-2">
+                <div class="col-12 mt-3">
                   <button class="btn-book" onclick="submitBooking()">
-                    <i class="fas fa-paper-plane me-2"></i> Confirm Appointment
-                    Request
+                    <i class="fas fa-lock me-2"></i> Confirm & Proceed to Payment
                   </button>
                 </div>
               </div>
@@ -2612,6 +2647,104 @@
         });
       }
 
+      // ════════════════════ SLOT MANAGEMENT SYSTEM ════════════════════
+      const TIME_SLOTS = [
+        "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00"
+      ];
+      const SLOT_LABELS = [
+        "10:00 - 11:00 AM",
+        "11:00 - 12:00 PM",
+        "12:00 - 01:00 PM",
+        "01:00 - 02:00 PM",
+        "02:00 - 03:00 PM",
+        "03:00 - 04:00 PM",
+        "04:00 - 05:00 PM",
+        "05:00 - 06:00 PM"
+      ];
+
+      // Load bookings from localStorage
+      function getAllBookings() {
+        const bookings = localStorage.getItem("clinic_bookings");
+        return bookings ? JSON.parse(bookings) : [];
+      }
+
+      // Check if a slot is booked
+      function isSlotBooked(date, time) {
+        const bookings = getAllBookings();
+        return bookings.some(b => b.date === date && b.time === time);
+      }
+
+      // Render time slots for selected date
+      function renderTimeSlots(date) {
+        const slotContainer = document.getElementById("slotContainer");
+        const selectedTime = document.getElementById("bTime").value;
+        
+        if (!date) {
+          slotContainer.innerHTML = '<p style="color: #999; text-align: center; padding: 20px; grid-column: 1/-1;">Select a date to view available slots</p>';
+          return;
+        }
+
+        const selectedDate = new Date(date);
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        const isToday = selectedDate.getTime() === today.getTime();
+        const currentHour = new Date().getHours();
+
+        let slotsHtml = '';
+        let availableCount = 0;
+
+        TIME_SLOTS.forEach((time, index) => {
+          const hour = parseInt(time.split(':')[0]);
+          const isPast = isToday && hour <= currentHour;
+          const isBooked = isSlotBooked(date, time);
+          const isSelected = selectedTime === `${time}|${SLOT_LABELS[index]}`;
+          
+          let slotClass = 'time-slot';
+          if (isPast) slotClass += ' past';
+          if (isBooked) slotClass += ' booked';
+          if (isSelected) slotClass += ' selected';
+
+          if (!isPast && !isBooked) availableCount++;
+
+          slotsHtml += `
+            <div class="${slotClass}" 
+              onclick="${isPast || isBooked ? '' : `selectSlot('${time}', '${SLOT_LABELS[index]}')`}">
+              ${SLOT_LABELS[index]}
+            </div>
+          `;
+        });
+
+        slotContainer.innerHTML = slotsHtml;
+
+        if (availableCount === 0) {
+          const msg = isToday 
+            ? '<i class="fas fa-calendar-alt me-2"></i> No slots available today. Please select another date.'
+            : '<i class="fas fa-check-circle me-2"></i> All slots booked for this date. Please select another date.';
+          slotContainer.innerHTML = `<p style="color: #e53e3e; text-align: center; padding: 20px; grid-column: 1/-1;">${msg}</p>`;
+        }
+      }
+
+      // Select a time slot
+      function selectSlot(time, label) {
+        document.getElementById("bTime").value = `${time}|${label}`;
+        renderTimeSlots(document.getElementById("bDate").value);
+      }
+
+      // Date change handler
+      document.addEventListener('DOMContentLoaded', function() {
+        const dateInput = document.getElementById("bDate");
+        
+        // Set minimum date to today
+        if (dateInput) {
+          dateInput.min = new Date().toISOString().split("T")[0];
+          
+          dateInput.addEventListener("change", function() {
+            document.getElementById("bTime").value = "";
+            renderTimeSlots(this.value);
+          });
+        }
+      });
+
       // IntersectionObserver for counters
       const obs = new IntersectionObserver(
         (entries) => {
@@ -2634,38 +2767,57 @@
         const email = document.getElementById("bEmail").value.trim();
         const age = document.getElementById("bAge").value.trim();
         const date = document.getElementById("bDate").value;
-        const time = document.getElementById("bTime").value;
+        const timeValue = document.getElementById("bTime").value;
         const service = document.getElementById("bService").value;
         const msg = document.getElementById("bMsg").value.trim();
 
-        if (!name || !phone || !date || !time || !service) {
-          showToast("⚠️ Please fill all required fields!", "#e53e3e");
+        if (!name || !phone || !date || !timeValue || !service) {
+          showToast("⚠️ Please fill all required fields and select a time slot!", "#e53e3e");
           return;
         }
 
-        // Validate phone number (basic validation)
+        // Validate phone number
         if (!/^\d{10}$/.test(phone.replace(/\D/g, ""))) {
           showToast("⚠️ Please enter a valid 10-digit phone number!", "#e53e3e");
           return;
         }
 
-        // Store booking data in sessionStorage
+        // Extract time from timeValue (format: "HH:MM|Label")
+        const [time, timeLabel] = timeValue.split("|");
+
+        // Check if slot is still available (double-check)
+        if (isSlotBooked(date, time)) {
+          showToast("⚠️ This slot was just booked! Please select another.", "#e53e3e");
+          renderTimeSlots(date);
+          return;
+        }
+
+        // Store booking data
         const bookingData = {
+          id: Date.now().toString(),
           name: name,
           phone: phone,
           email: email,
           age: age,
           date: date,
           time: time,
+          timeLabel: timeLabel,
           service: service,
           message: msg,
+          status: "pending",
           bookingTime: new Date().toISOString(),
         };
 
+        // Save to localStorage for permanent storage
+        const allBookings = getAllBookings();
+        allBookings.push(bookingData);
+        localStorage.setItem("clinic_bookings", JSON.stringify(allBookings));
+
+        // Also save current booking to sessionStorage for payment page
         sessionStorage.setItem("bookingData", JSON.stringify(bookingData));
 
-        // Show processing message and redirect to payment
-        showToast("✅ Redirecting to payment...", "#1565c0");
+        // Show success message
+        showToast("✅ Slot confirmed! Redirecting to payment...", "#22863a");
         setTimeout(() => {
           window.location.href = "payment.html";
         }, 1500);
@@ -2678,10 +2830,6 @@
         t.classList.add("show");
         setTimeout(() => t.classList.remove("show"), 4000);
       }
-
-      // Set minimum booking date to today
-      const dateInput = document.getElementById("bDate");
-      if (dateInput) dateInput.min = new Date().toISOString().split("T")[0];
 
       // Testimonial slider auto-scroll
       const testimonialSlider = document.querySelector(".testimonial-slider");
